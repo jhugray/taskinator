@@ -59,7 +59,7 @@ var createTaskEl = function(taskDataObj) {
 
   tasks.push(taskDataObj);
 
-  localStorage.setItem("tasks", tasks);
+  saveTasks();
 
   // increase task counter for next unique id
   taskIdCounter++;
@@ -120,7 +120,7 @@ for (var i = 0; i < tasks.length; i++) {
     tasks[i].type = taskType;
   }
 
-  localStorage.setItem("tasks", tasks);
+  saveTasks();
 };
 
 
@@ -175,7 +175,7 @@ var taskStatusChangeHandler = function(event) {
     }
   }
 
-  localStorage.setItem("tasks", tasks);
+  saveTasks();
 
 };
 
@@ -209,20 +209,20 @@ var deleteTask = function(taskId) {
   taskSelected.remove();
 
   // create new array to hold updated list of tasks
-var updatedTaskArr = [];
+  var updatedTaskArr = [];
 
-// loop through current tasks
-for (var i = 0; i < tasks.length; i++) {
-  // if tasks[i].id doesn't match the value of taskId, let's keep that task and push it into the new array
-  if (tasks[i].id !== parseInt(taskId)) {
-    updatedTaskArr.push(tasks[i]);
+  // loop through current tasks
+  for (var i = 0; i < tasks.length; i++) {
+    // if tasks[i].id doesn't match the value of taskId, let's keep that task and push it into the new array
+    if (tasks[i].id !== parseInt(taskId)) {
+      updatedTaskArr.push(tasks[i]);
+   }
   }
-}
 
-// reassign tasks array to be the same as updatedTaskArr
-tasks = updatedTaskArr;
+  // reassign tasks array to be the same as updatedTaskArr
+  tasks = updatedTaskArr;
 
-localStorage.setItem("tasks", tasks);
+  saveTasks();
 };
 
 var saveTasks = function() {
